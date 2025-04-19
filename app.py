@@ -1,4 +1,5 @@
 import dash
+from flask import session
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
@@ -8,6 +9,8 @@ import re
 
 
 app = dash.Dash(__name__, external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"], suppress_callback_exceptions=True)
+
+app.server.secret_key = 'insecureKeyJustUsedForUniqueSessions'
 
 # Initializing app layout: page-content is set in a callback below based off the current URL
 # By default: '/' will display scatter graph
@@ -79,6 +82,16 @@ def display_page(path):
 
 # Main application callback to update scatter graph, using parameters of sliders outlined above
 def filter_scatter(range_occurrences, range_confidence, range_lift, range_review_score, direction_filter, theme_selection, genre_selection):
+
+    # Adding session variables to make values unique across different users
+    session['range_occurrences'] = range_occurrences
+    session['range_confidence'] = range_confidence
+    session['range_lift'] = range_lift
+    session['range_review_score'] = range_review_score
+    session['direction_filter'] = direction_filter
+    session['theme_selection'] = theme_selection
+    session['genre_selection'] = genre_selection
+
 
     # Creating pairings of minimum & maximum slider values
     min_occurrences, max_occurrences = range_occurrences
