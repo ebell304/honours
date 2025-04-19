@@ -186,6 +186,9 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
     return fig
 
 
-# Runs the application
-if __name__ == "__main__":
-    app.run(debug=True)
+# Runs the application locally
+#if __name__ == "__main__":
+#    app.run(debug=True)
+
+# Running the app using guinicorn/Flask
+server = app.server 
