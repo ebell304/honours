@@ -1,16 +1,14 @@
 import dash
-from flask import session
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 from visualise import fig, rules, themes, genres
+import plotly.graph_objects as go
 import plotly.colors as pc
 import re
 
 
 app = dash.Dash(__name__, external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"], suppress_callback_exceptions=True)
-
-app.server.secret_key = 'insecureKeyJustUsedForUniqueSessions'
 
 # Initializing app layout: page-content is set in a callback below based off the current URL
 # By default: '/' will display scatter graph
@@ -83,14 +81,8 @@ def display_page(path):
 # Main application callback to update scatter graph, using parameters of sliders outlined above
 def filter_scatter(range_occurrences, range_confidence, range_lift, range_review_score, direction_filter, theme_selection, genre_selection):
 
-    # Adding session variables to make values unique across different users
-    session['range_occurrences'] = range_occurrences
-    session['range_confidence'] = range_confidence
-    session['range_lift'] = range_lift
-    session['range_review_score'] = range_review_score
-    session['direction_filter'] = direction_filter
-    session['theme_selection'] = theme_selection
-    session['genre_selection'] = genre_selection
+    # Reassigning fig to avoid shared state
+    fig_copy = go.Figure(fig)
 
 
     # Creating pairings of minimum & maximum slider values
@@ -163,7 +155,7 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
 
     
     # Re-updating hoverlabel data since it gets lost on callbacks
-    fig.update_traces(
+    fig_copy.update_traces(
         x=filtered_df['occurrences'], 
         y=filtered_df['confidence'],
         marker=dict(color=filtered_df['lift'], coloraxis="coloraxis"),
@@ -176,7 +168,7 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
     colour_min = rules['lift'].min()
     colour_max = rules['lift'].max()
     
-    fig.update_layout(
+    fig_copy.update_layout(
         coloraxis = dict(
             colorscale='Plasma',
             cmin=colour_min,
@@ -187,7 +179,7 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
     max_lift = rules['lift'].max()
 
     # Setting hoverlabel colour to match lift
-    fig.update_traces(
+    fig_copy.update_traces(
         hoverlabel=dict(
             bgcolor=[
                 pc.sample_colorscale('Plasma', [lift / max_lift])[0]  
@@ -196,7 +188,7 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
         )
     )
 
-    return fig
+    return fig_copy
 
 
 # Runs the application locally
