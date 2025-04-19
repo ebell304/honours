@@ -1,0 +1,50 @@
+body{
+    background-color: slategray;
+}
+
+h1{
+    background-color: rgb(182, 182, 182);
+}
+
+
+
+.scatter-plot{
+    background-color: rgb(255, 255, 255);
+}
+
+
+#container-filters{
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+#container-sliders{
+    background-color: white;
+    width: 100%;
+    margin-left: 5%;
+}
+
+
+
+#container-selections{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#container-theme-genres{
+    width: 100%;
+}
+
+#container-theme-dropdown{
+    display: inline-block;
+    width: 30%;
+}
+
+#container-genre-dropdown{
+    display: inline-block;
+    width: 30%;
+}
