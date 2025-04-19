@@ -156,6 +156,7 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
     
     # Re-updating hoverlabel data since it gets lost on callbacks
     fig_copy.update_traces(
+        type='scattergl',
         x=filtered_df['occurrences'], 
         y=filtered_df['confidence'],
         marker=dict(color=filtered_df['lift'], coloraxis="coloraxis"),
