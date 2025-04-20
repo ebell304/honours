@@ -194,8 +194,8 @@ def filter_scatter(range_occurrences, range_confidence, range_lift, range_review
 
 
 # NOTE: THIS RUNS THE APPLICATION LOCALLY
-# #if __name__ == "__main__":
-# #    app.run(debug=True)
+#if __name__ == "__main__":
+#    app.run(debug=True)
 
 # NOTE: THIS RUNS THE APPLICATION USING A DEPLOYED SERVER
 server = app.server 
