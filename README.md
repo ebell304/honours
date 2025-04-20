@@ -1,6 +1,7 @@
 ***USER GUIDE***
 
 **Access Application Using URL**: https://honours-96qt.onrender.com/
+Note: The website will take up to 2 minutes to start up from inactivity.
 
 **OR**
 
@@ -14,6 +15,11 @@
 6. Still within the terminal, type 'py app.py' to start the applicaion.
 7. The application will now be accessible with the url: http://127.0.0.1:8050/ (localhost)
 8. Once finished, use CTRL+C within the Python terminal to close the application.
+
+
+
+
+
 
 
 
