@@ -1,15 +1,20 @@
 body{
-    background-color: slategray;
+    background-image: linear-gradient(to right, #16088b, #7502a7, #d7556d, #cf9645, #c5c544);
 }
 
-h1{
-    background-color: rgb(182, 182, 182);
+h2{
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family:sans-serif;
+    letter-spacing: 0.6px; 
 }
 
 
 
 .scatter-plot{
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(to right, #16088b, #7502a7, #d7556d, #cf9645, #c5c544);
 }
 
 
@@ -47,4 +52,17 @@ h1{
 #container-genre-dropdown{
     display: inline-block;
     width: 30%;
+}
+
+.rc-slider-track{
+    background-image: linear-gradient(to right, #16088b, #7502a7, #d7556d, #fca836, #f2f122);
+}
+
+.rc-slider-rail{
+    background-color: #00bfff;
+}
+
+
+.rc-slider-handle:hover {
+    border-color: #ff00bf;    
 }

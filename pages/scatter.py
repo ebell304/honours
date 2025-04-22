@@ -27,7 +27,7 @@ theme_options = [{'label': theme, 'value': theme}
 layout = html.Div([
 
     # Page Header
-    html.H2("Association Rule Mining Scatter Graph",
+    html.H2("Steam Games Association Rule Mining Scatter Graph",
             style={'textAlign': 'center'}),
 
     # Scatter Plot (will be filtered by filter_scatter() callback in app.py)
@@ -50,8 +50,24 @@ layout = html.Div([
         html.Details([
             # Details/Summary section allows filter menu to pop up from footer
             html.Summary("TOGGLE MENU", style={
-                         'cursor': 'pointer', 'padding': '10px', 'justify-self': 'center'}),
+                         'cursor': 'pointer', 'padding': '10px', 'justify-self': 'center', 'fontWeight': '500'}),
 
+            # Controls Description
+            html.Div([
+                html.P(["Double Click: Reset Graph View"], style={'margin-right': '7%'}),
+                html.P(["Scroll-wheel: Zoom In/Out"], style={'margin-right': '4%'}),
+                html.P(["Drag: Pan Graph"], style={'margin-left': '7%'}),
+            ], id="controls", style={
+                "display": 'flex', 
+                'justify-content': 'center', 
+                'fontWeight': '500', 
+                'border': '1px solid purple', 
+                'padding-top': '5px', 
+                'height': '40px',
+                'backgroundColor': 'rgba(255, 255, 250, 0.8)'
+                }),
+
+            
             html.Div([
 
                 html.Div([
@@ -63,7 +79,7 @@ layout = html.Div([
                                 options=theme_options,
                                 multi=True,
                                 placeholder='Select Themes'
-                            )], id='container-theme-dropdown'),
+                            )], id='container-theme-dropdown', style={'margin-top': '20px', 'margin-left': '20px', 'width': '250px', 'border': '1px solid #834094'}),
 
 
                         html.Div([
@@ -72,7 +88,7 @@ layout = html.Div([
                                 options=genre_options,
                                 multi=True,
                                 placeholder='Select Genres'
-                            )], id='container-genre-dropdown'),
+                            )], id='container-genre-dropdown', style={'margin-top': '20px', 'margin-left': '20px', 'width': '250px', 'border': '1px solid #834094' }),
                     ], id='container-theme-genres'),
 
                     html.Div([
@@ -87,26 +103,25 @@ layout = html.Div([
                             ],
                             value='all'
                         )
-                    ], id='container-direction-filter'),
+                    ], id='container-direction-filter', style={'width': '250px', 'margin-right': '10px', 'margin-top': '20px'}),
 
-                ], id='container-selections', style={'backgroundColor': 'rgba(255, 255, 250, 0.5)', 'borderRadius': '30px'}),
+                ], id='container-selections', style={'backgroundColor': 'rgba(255, 255, 250, 0.8)', 'borderRadius': '30px', 'display': 'flex', 'flexDirection': 'row'}),
 
 
                 html.Div([
                     html.Div([
-                        html.Label("Filter Occurrences"),
+                        html.Label("Filter Occurrences", style={'margin-left': '15px', 'margin-top': '5px'}),
                         dcc.RangeSlider(
                             id='slider-occurrences',
                             min=rules['occurrences'].min(),
                             max=rules['occurrences'].max(),
                             value=[rules['occurrences'].min(
-                            ), rules['occurrences'].max()]
-
+                            ), rules['occurrences'].max()],
                         )
                     ], id='container-occurrences'),
 
                     html.Div([
-                        html.Label("Filter Confidence"),
+                        html.Label("Filter Confidence", style={'margin-left': '15px'}),
                         dcc.RangeSlider(
                             id='slider-confidence',
                             min=rules['confidence'].min(),
@@ -119,7 +134,7 @@ layout = html.Div([
                     ], id='container-confidence'),
 
                     html.Div([
-                        html.Label("Filter Lift"),
+                        html.Label("Filter Lift", style={'margin-left': '15px'}),
                         dcc.RangeSlider(
                             id='slider-lift',
                             min=0,
@@ -132,7 +147,7 @@ layout = html.Div([
 
 
                     html.Div([
-                        html.Label("Filter Logarithmic Review Score"),
+                        html.Label("Filter Logarithmic Review Score", style={'margin-left': '15px'}),
                         dcc.RangeSlider(
                             id='slider-review-score',
                             min=0,
@@ -145,7 +160,7 @@ layout = html.Div([
 
 
 
-                ], id='container-sliders', style={'backgroundColor': 'rgba(255, 255, 250, 0.5)', 'borderRadius': '30px'}),
+                ], id='container-sliders', style={'backgroundColor': 'rgba(255, 255, 250, 0.8)', 'borderRadius': '30px'}),
 
 
             ], id='container-filters'),
@@ -161,8 +176,8 @@ layout = html.Div([
         'zIndex': '1000',
         'maxHeight': '400px',
         'overflowY': 'auto',
-
-        'backgroundColor': 'rgba(255, 255, 255, 0.8)',
+        'border-top': '1px solid purple',
+        'backgroundColor': 'rgba(255, 255, 255, 0.85)',
     })
 
 ], className='scatter-plot')
